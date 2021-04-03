@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 
 exports.GET_ATTRACTIONS = (req, res, next) => {
   Attraction.find()
-    .select("title category description imageURL rating priceRating")
+    .select(
+      "_id title category description imageURL rating priceRating address coordinate"
+    )
     .exec()
     .then((docs) => {
       if (docs.length < 1) {
@@ -13,11 +15,14 @@ exports.GET_ATTRACTIONS = (req, res, next) => {
       } else {
         res.status(200).json(
           docs.map((item) => ({
+            id: item._id,
             title: item.title,
             category: item.category,
             rating: item.rating,
             price: item.priceRating,
             description: item.description,
+            address: item.address,
+            coordinate: item.coordinate,
             imageURL: item.imageURL,
           }))
         );

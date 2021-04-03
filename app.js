@@ -39,8 +39,14 @@ app.use((req, res, next) => {
 // Routes
 const userRoutes = require("./api/routes/users");
 const attractionRoutes = require("./api/routes/attractions");
-app.use("/v1/users", userRoutes);
-app.use("/v1/attractions", attractionRoutes);
+const popularRoutes = require("./api/routes/populars");
+const newsRoutes = require("./api/routes/news");
+const eventsRoutes = require("./api/routes/events");
+app.use("/users", userRoutes);
+app.use("/attractions", attractionRoutes);
+app.use("/populars", popularRoutes);
+app.use("/news", newsRoutes);
+app.use("/events", eventsRoutes);
 
 // No route found erorr handler
 app.use((req, res, next) => {
